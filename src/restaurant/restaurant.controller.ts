@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Logger, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Logger, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { CreateRestaurantDto } from 'src/core/dto/restaurant.dto';
 import { Restaurant } from 'src/core/interface/restaurant.interface';
 import { RestaurantService } from './restaurant.service';
 import { appConfig } from 'src/core/config/appConfig';
 import { LoggerConstant } from 'src/core/constants/loggerConstant';
+import { AuthGuard } from 'src/core/gaurd/auth.gaurd';
 
 @Controller(appConfig.restaurantController)
 export class RestaurantController {
@@ -11,6 +12,7 @@ export class RestaurantController {
     constructor(private readonly restaurantService: RestaurantService) { }
 
     @Post()
+    @UseGuards(AuthGuard)
     async create(@Body() createRestaurantDto: CreateRestaurantDto): Promise<Restaurant> {
         this.logger.log(LoggerConstant.CreateRestaurantController);
         try{
@@ -49,6 +51,7 @@ export class RestaurantController {
     }
 
     @Put(appConfig.restaurantParamId)
+    @UseGuards(AuthGuard)
     async update(@Param(appConfig.restaurantId) id: string, @Body() updateRestaurantDto: CreateRestaurantDto): Promise<Restaurant> {
         // return 
         try{
@@ -62,6 +65,7 @@ export class RestaurantController {
     }
 
     @Delete(appConfig.restaurantParamId)
+    @UseGuards(AuthGuard)
     async remove(@Param(appConfig.restaurantId) id: string): Promise<Restaurant> {
         // return 
         try{
