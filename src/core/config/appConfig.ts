@@ -1,5 +1,5 @@
 export class appConfig{
-    public static readonly Port = 3004
+    public static readonly Port = 3002
     public static readonly jwtToken = "This is a test secret key"
 
     //user config
@@ -10,4 +10,9 @@ export class appConfig{
     public static readonly usernameParam = "username"
     public static readonly changePasswordPath = ":username/change-password"
     public static readonly newPassword = "newPassword"
+
+    //restaurant Config
+    public static readonly restaurantController = "restaurant"
+    public static readonly restaurantParamId = ":id"
+    public static readonly restaurantId = "id"
 }
